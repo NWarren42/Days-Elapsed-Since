@@ -4,12 +4,22 @@ import time
 
 from machine import Pin
 
+def read_wifi_credentials(filename):
+    credentials = {}
+    try:
+        with open(filename, "r") as file:
+            for line in file:
+                parts = line.strip().split(",")  # Split on commas
+                if len(parts) == 2:
+                    ssid = parts[0].strip().strip('"')  # Remove spaces & quotes
+                    password = parts[1].strip().strip('"')
+                    credentials[ssid] = password
+    except OSError:
+        print(f"Could not open file: {filename}")
+    return credentials
+
 # List of known Wi-Fi networks with passwords
-KNOWN_NETWORKS = {
-    "Hous-fi": "nothomeless",
-    "WorkWiFi": "securepass",
-    "SchoolWiFi": "schoolpass"
-}
+KNOWN_NETWORKS = read_wifi_credentials("SSIDs.csv")
 
 # Eastern Timezone Constants
 STANDARD_OFFSET = -5  # EST (Eastern Standard Time)
@@ -208,6 +218,19 @@ def main():
     since_days = 0  # Initialize with a default value
     last_update_time = 0
     
+    local_time = get_local_time_est()
+            
+    if local_time:
+        since_days = days_since(2024, 3, 19)  # Change to your desired date
+        if since_days is not None:
+            print(f"Days since 2024-03-19: {since_days}")
+        else:
+            print("Error calculating elapsed days")
+    else:
+        print("Error retrieving time")
+
+    display_number(since_days)
+
     while True:
         current_time = time.time()
         

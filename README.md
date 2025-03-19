@@ -24,7 +24,7 @@ This is mainly so that I'm not uploading my wifi credentials to my public github
 
 Each digit needs to be individually addressed on the 7seg display, and only one can be addressed at a time due to the segments having common grounds, so this display relies on persistence of vision. 330R current limiting resistors are placed at the terminals of each digit to not blow my ESP32. Rough display wiring layout is shown below.
 
-![image.png](\media\7SegLayout.png)![image.png](\media\7SegCircuitDiagram.png)
+![image.png](/media/7SegLayout.png)![image.png](/media/7SegCircuitDiagram.png)
 
 The direct pin mappings are detailed a bit more in the code.
 
@@ -32,4 +32,4 @@ The direct pin mappings are detailed a bit more in the code.
 
 Enclosure STLs are included on the github. Currently on V1.1-C, and the final assembly is pictured below.
 
-![image.png](\media\V1.1-C_Full_Enclosure.png)
+![image.png](/media/V1.1-C_Full_Enclosure.png)
